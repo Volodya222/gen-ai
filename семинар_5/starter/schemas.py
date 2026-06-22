@@ -125,3 +125,40 @@ TOOL_SCHEMAS = [
         },
     },
 ]
+
+
+# ----- ДЗ семинара 5: шестой инструмент -----
+TOOL_SCHEMAS.append(
+    {
+        "type": "function",
+        "function": {
+            "name": "compare_periods",
+            "description": (
+                "Сравнить одну метрику в двух периодах: возвращает значения a и b, "
+                "их разницу (delta) и отношение (ratio = b/a). Использовать для "
+                "вопросов вида «во сколько раз вырос/изменился X», «сравни X в A и B», "
+                "«на сколько изменилась ставка/инфляция между периодами». Не считай "
+                "разницу и отношение вручную — этот инструмент делает это сам."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "metric": {
+                        "type": "string",
+                        "enum": ["key_rate", "fx_USD", "fx_EUR", "fx_CNY", "cpi", "unemployment"],
+                        "description": "Какую метрику сравнивать.",
+                    },
+                    "period_a": {
+                        "type": "string",
+                        "description": "Первый (более ранний) период: 'YYYY-MM' или 'YYYY-MM-DD'.",
+                    },
+                    "period_b": {
+                        "type": "string",
+                        "description": "Второй (более поздний) период: 'YYYY-MM' или 'YYYY-MM-DD'.",
+                    },
+                },
+                "required": ["metric", "period_a", "period_b"],
+            },
+        },
+    }
+)

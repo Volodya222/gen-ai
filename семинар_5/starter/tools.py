@@ -289,3 +289,80 @@ def calculate(expression: str) -> dict:
         return {"expression": expression, "result": round(val, 6)}
     except Exception as e:
         return {"error": f"{type(e).__name__}: {e}"}
+
+
+# ===========================================================================
+# 6. Сравнение метрики в двух периодах (ДЗ семинара 5)
+# ===========================================================================
+
+_METRICS = {"key_rate", "fx_USD", "fx_EUR", "fx_CNY", "cpi", "unemployment"}
+
+
+def _period_to_date(period: str) -> str:
+    """'YYYY-MM' -> 'YYYY-MM-01'; 'YYYY-MM-DD' оставляем как есть."""
+    period = period.strip()
+    if re.fullmatch(r"\d{4}-\d{2}", period):
+        return period + "-01"
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", period):
+        return period
+    raise ValueError(f"период '{period}' не в формате YYYY-MM или YYYY-MM-DD")
+
+
+def _resolve_metric(metric: str, period: str) -> dict:
+    """Достать значение метрики на период через существующие инструменты."""
+    if metric.startswith("fx_"):
+        currency = metric.split("_", 1)[1]
+        r = get_fx_rate(currency, _period_to_date(period))
+        if "error" in r:
+            return {"error": r["error"]}
+        return {"date": r["date"], "value": r["rate"], "source": r["source"]}
+    if metric == "key_rate":
+        r = get_key_rate(_period_to_date(period))
+        if "error" in r:
+            return {"error": r["error"]}
+        return {"date": r["date"], "value": r["rate"], "source": r["source"]}
+    if metric in ("cpi", "unemployment"):
+        d = _parse_date(_period_to_date(period))
+        fn = get_inflation if metric == "cpi" else get_unemployment
+        r = fn(d.year, d.month)
+        if "error" in r:
+            return {"error": r["error"]}
+        key = "cpi_yoy" if metric == "cpi" else "unemployment"
+        return {"date": f"{d.year}-{d.month:02d}", "value": r[key], "source": r["source"]}
+    return {"error": f"неизвестная метрика: {metric}"}
+
+
+def compare_periods(metric: str, period_a: str, period_b: str) -> dict:
+    """
+    Сравнить значение метрики в двух периодах.
+
+    Args:
+        metric: "key_rate" | "fx_USD" | "fx_EUR" | "fx_CNY" | "cpi" | "unemployment"
+        period_a, period_b: "YYYY-MM" или "YYYY-MM-DD".
+
+    Returns:
+        {"metric": ..., "a": {"date":..,"value":..}, "b": {"date":..,"value":..},
+         "delta": b.value - a.value, "ratio": b.value / a.value, "source": "..."}
+    """
+    if metric not in _METRICS:
+        return {"error": f"метрика '{metric}' не из списка {sorted(_METRICS)}"}
+    try:
+        a = _resolve_metric(metric, period_a)
+        b = _resolve_metric(metric, period_b)
+    except ValueError as e:
+        return {"error": str(e)}
+    if "error" in a:
+        return {"error": f"период A: {a['error']}"}
+    if "error" in b:
+        return {"error": f"период B: {b['error']}"}
+
+    ratio = (b["value"] / a["value"]) if a["value"] else None
+    src = a["source"] if a["source"] == b["source"] else f"{a['source']}+{b['source']}"
+    return {
+        "metric": metric,
+        "a": {"date": a["date"], "value": a["value"]},
+        "b": {"date": b["date"], "value": b["value"]},
+        "delta": round(b["value"] - a["value"], 4),
+        "ratio": round(ratio, 4) if ratio is not None else None,
+        "source": src,
+    }
