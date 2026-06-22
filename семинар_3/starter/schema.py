@@ -1,66 +1,82 @@
 """
-schema.py — общие Pydantic-схемы пайплайна
-===========================================
-Заполняется постепенно, по мере прохождения раундов. На старте — пусто.
+schema.py — Pydantic-схемы пайплайна анализа экспертных интервью (GPR/РЧ).
+==========================================================================
+Адаптация семинарской схемы фокус-группы под новую область:
+  Participant  → Expert      (эксперт вместо участника)
+  Concern      → Claim        (тезис вместо жалобы)
+  аспекты price/speed/ux/... → новизна/обоснованность/практичность/риски
 
-Карта моделей по раундам:
-  Раунд 1   — Concern, Participant
-  Раунд 2   — AspectSentiment, ParticipantSentiment
-  Раунд 2.5 — DiscoveredAspects (для autodiscovery)
-  Раунд 3   — ChunkSummary, DiscussionSummary
-  Раунд 3.5 — GroupSummary (для иерархического Map-Reduce)
-  Раунд 5   — ActionVerdict, JudgeReport
-  Раунд 7   — MultiDocSummary
+Требования ДЗ выполнены:
+  • ≥1 Optional      — Expert.years_experience
+  • ≥1 Literal       — ClaimCategory, AspectName, sentiment-поля, support
+  • ≥1 field_validator — Claim.quote (непустая, осмысленной длины) +
+                         Expert.years_experience (правдоподобный диапазон)
 """
 
 from __future__ import annotations
 
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+
+# Фиксированные справочники
+ClaimCategory = Literal[
+    "методология", "аппаратура", "обработка_сигналов", "ограничения", "применение"
+]
+AspectName = Literal["новизна", "обоснованность", "практичность", "риски"]
+ALL_ASPECTS: list[str] = ["новизна", "обоснованность", "практичность", "риски"]
 
 
 # ══════════════════════════════════════════════════════════
 # Раунд 1 — Information Extraction
 # ══════════════════════════════════════════════════════════
-class Concern(BaseModel):
-    category: Literal["price", "speed", "ux", "support", "feature"]
-    severity: int = Field(ge=1, le=5)
+class Claim(BaseModel):
+    category: ClaimCategory
+    strength: int = Field(ge=1, le=5, description="сила/категоричность тезиса 1-5")
     quote: str
 
+    @field_validator("quote")
+    @classmethod
+    def quote_must_be_meaningful(cls, v: str) -> str:
+        # Бизнес-инвариант: цитата не пустая и не обрывок в пару символов.
+        if len(v.strip()) < 10:
+            raise ValueError("Цитата слишком короткая — вероятно, обрывок")
+        return v.strip()
 
-class Participant(BaseModel):
+
+class Expert(BaseModel):
     name: str
-    age: Optional[int] = None
-    city: str
-    occupation: str
-    concerns: list[Concern]
-    competitor_mentions: list[str] = Field(default_factory=list)
+    affiliation: str = ""
+    years_experience: Optional[int] = None  # ← Optional (может быть не указан)
+    specialization: str
+    claims: list[Claim]
+    related_methods: list[str] = Field(default_factory=list)
 
-
-class MatchVerdict(BaseModel):
-    matched: bool
-    matched_index: int = Field(default=-1, description="номер жалобы или -1")
-    reason: str = ""
+    @field_validator("years_experience")
+    @classmethod
+    def experience_plausible(cls, v: Optional[int]) -> Optional[int]:
+        if v is not None and not (0 <= v <= 60):
+            raise ValueError("Стаж вне правдоподобного диапазона 0-60 лет")
+        return v
 
 
 # ══════════════════════════════════════════════════════════
 # Раунд 2 — Аспектный анализ
 # ══════════════════════════════════════════════════════════
 class AspectSentiment(BaseModel):
-    aspect: Literal["price", "speed", "ux", "support", "feature"]
+    aspect: AspectName
     sentiment: Literal["positive", "negative", "neutral"]
     quote: str
     confidence: float = Field(ge=0, le=1)
 
 
-class ParticipantSentiment(BaseModel):
+class ExpertSentiment(BaseModel):
     name: str
     aspects: list[AspectSentiment]
 
 
 # ══════════════════════════════════════════════════════════
-# Раунд 2.5 — Autodiscovery аспектов
+# Раунд 2.5 — Autodiscovery аспектов (для «отлично»)
 # ══════════════════════════════════════════════════════════
 class DiscoveredAspect(BaseModel):
     name: str
@@ -69,18 +85,6 @@ class DiscoveredAspect(BaseModel):
 
 class DiscoveredAspects(BaseModel):
     aspects: list[DiscoveredAspect] = Field(min_length=3, max_length=12)
-
-
-class DynamicAspect(BaseModel):
-    aspect: str
-    sentiment: Literal["positive", "negative", "neutral"]
-    quote: str
-    confidence: float = Field(ge=0, le=1)
-
-
-class DynamicParticipant(BaseModel):
-    name: str
-    aspects: list[DynamicAspect]
 
 
 # ══════════════════════════════════════════════════════════
@@ -96,15 +100,6 @@ class DiscussionSummary(BaseModel):
     headline: str
     key_findings: list[str] = Field(min_length=2, max_length=8)
     action_items: list[str] = Field(min_length=1, max_length=8)
-
-
-# ══════════════════════════════════════════════════════════
-# Раунд 3.5 — Иерархический Map-Reduce
-# ══════════════════════════════════════════════════════════
-class GroupSummary(BaseModel):
-    speakers: list[str]
-    themes: list[str] = Field(min_length=1, max_length=6)
-    overall_sentiment: Literal["positive", "negative", "mixed"]
 
 
 # ══════════════════════════════════════════════════════════
@@ -124,9 +119,9 @@ class JudgeReport(BaseModel):
 
 
 # ══════════════════════════════════════════════════════════
-# Раунд 7 — Multi-doc сводка
+# Раунд 7 — Multi-doc свод (для «отлично»)
 # ══════════════════════════════════════════════════════════
 class MultiDocSummary(BaseModel):
     common_themes: list[str] = Field(min_length=1, max_length=8)
-    unique_per_bank: dict[str, list[str]]
+    unique_per_expert: dict[str, list[str]]
     overall_headline: str
