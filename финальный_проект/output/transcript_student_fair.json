@@ -1,0 +1,94 @@
+{
+  "persona": "student_fair",
+  "rounds": 6,
+  "transcript": [
+    {
+      "round": 1,
+      "proposer_tools": [
+        "acceptance_stats",
+        "expected_payoffs"
+      ],
+      "offer": 40,
+      "responder_accept": false,
+      "fairness_perceived": "unfair",
+      "proposer_payoff": 0,
+      "responder_payoff": 0,
+      "judge_score": 5,
+      "hallucinations": []
+    },
+    {
+      "round": 2,
+      "proposer_tools": [
+        "acceptance_stats",
+        "expected_payoffs"
+      ],
+      "offer": 30,
+      "responder_accept": false,
+      "fairness_perceived": "unfair",
+      "proposer_payoff": 0,
+      "responder_payoff": 0,
+      "judge_score": 5,
+      "hallucinations": [
+        "ghost_number: упомянуты числа [40] не из раунда"
+      ]
+    },
+    {
+      "round": 3,
+      "proposer_tools": [
+        "acceptance_stats",
+        "expected_payoffs"
+      ],
+      "offer": 50,
+      "responder_accept": true,
+      "fairness_perceived": "fair",
+      "proposer_payoff": 50,
+      "responder_payoff": 50,
+      "judge_score": 5,
+      "hallucinations": []
+    },
+    {
+      "round": 4,
+      "proposer_tools": [
+        "acceptance_stats",
+        "expected_payoffs"
+      ],
+      "offer": 50,
+      "responder_accept": true,
+      "fairness_perceived": "fair",
+      "proposer_payoff": 50,
+      "responder_payoff": 50,
+      "judge_score": 5,
+      "hallucinations": []
+    },
+    {
+      "round": 5,
+      "proposer_tools": [
+        "acceptance_stats",
+        "expected_payoffs"
+      ],
+      "offer": 50,
+      "responder_accept": true,
+      "fairness_perceived": "fair",
+      "proposer_payoff": 50,
+      "responder_payoff": 50,
+      "judge_score": 5,
+      "hallucinations": []
+    },
+    {
+      "round": 6,
+      "proposer_tools": [
+        "acceptance_stats",
+        "expected_payoffs"
+      ],
+      "offer": 30,
+      "responder_accept": false,
+      "fairness_perceived": "unfair",
+      "proposer_payoff": 0,
+      "responder_payoff": 0,
+      "judge_score": 5,
+      "hallucinations": [
+        "ghost_number: упомянуты числа [2] не из раунда"
+      ]
+    }
+  ]
+}

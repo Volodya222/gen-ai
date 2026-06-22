@@ -1,0 +1,304 @@
+{
+  "summary": {
+    "n_cases": 15,
+    "correctness": {
+      "exact_match_rate": 0.933,
+      "judge_consistent_rate": 1.0,
+      "judge_mean_score": 4.67,
+      "pass_rate": 0.933
+    },
+    "path": {
+      "avg_steps": 5.0,
+      "tools_used": {
+        "settle_round": 15
+      },
+      "total_tokens": 25802,
+      "prompt_tokens": 19599,
+      "completion_tokens": 6203,
+      "est_cost_usd": 0.003109
+    },
+    "hallucinations": {
+      "total_caught": 0,
+      "rate_per_case": 0.0
+    },
+    "hypothesis_check": {
+      "reject_rate_by_offer_pct": {
+        "10": 0.8,
+        "30": 0.4,
+        "45": 0.2
+      },
+      "human_benchmark": {
+        "offer_le_20pct": [
+          0.4,
+          0.6
+        ],
+        "offer_around_30pct": [
+          0.2,
+          0.4
+        ],
+        "offer_50pct": [
+          0.0,
+          0.05
+        ]
+      },
+      "verdict": "ПОДТВЕРЖДЕНО: модель отвергает низкие предложения заметно чаще, чем почти-равные — как люди в экспериментах."
+    }
+  },
+  "rows": [
+    {
+      "id": "tc01",
+      "persona_id": "student_fair",
+      "offer": 10,
+      "expected_accept": false,
+      "model_accept": false,
+      "exact_match": true,
+      "fairness_perceived": "unfair",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1562
+    },
+    {
+      "id": "tc02",
+      "persona_id": "student_fair",
+      "offer": 30,
+      "expected_accept": false,
+      "model_accept": false,
+      "exact_match": true,
+      "fairness_perceived": "unfair",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1567
+    },
+    {
+      "id": "tc03",
+      "persona_id": "student_fair",
+      "offer": 45,
+      "expected_accept": true,
+      "model_accept": true,
+      "exact_match": true,
+      "fairness_perceived": "borderline",
+      "judge_score": 4,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 2320
+    },
+    {
+      "id": "tc04",
+      "persona_id": "pragmatic_worker",
+      "offer": 10,
+      "expected_accept": false,
+      "model_accept": false,
+      "exact_match": true,
+      "fairness_perceived": "unfair",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1696
+    },
+    {
+      "id": "tc05",
+      "persona_id": "pragmatic_worker",
+      "offer": 30,
+      "expected_accept": true,
+      "model_accept": true,
+      "exact_match": true,
+      "fairness_perceived": "unfair",
+      "judge_score": 4,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1817
+    },
+    {
+      "id": "tc06",
+      "persona_id": "pragmatic_worker",
+      "offer": 45,
+      "expected_accept": true,
+      "model_accept": true,
+      "exact_match": true,
+      "fairness_perceived": "borderline",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1657
+    },
+    {
+      "id": "tc07",
+      "persona_id": "poor_pragmatist",
+      "offer": 10,
+      "expected_accept": true,
+      "model_accept": true,
+      "exact_match": true,
+      "fairness_perceived": "unfair",
+      "judge_score": 4,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1918
+    },
+    {
+      "id": "tc08",
+      "persona_id": "poor_pragmatist",
+      "offer": 30,
+      "expected_accept": true,
+      "model_accept": true,
+      "exact_match": true,
+      "fairness_perceived": "borderline",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1629
+    },
+    {
+      "id": "tc09",
+      "persona_id": "poor_pragmatist",
+      "offer": 45,
+      "expected_accept": true,
+      "model_accept": true,
+      "exact_match": true,
+      "fairness_perceived": "borderline",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1642
+    },
+    {
+      "id": "tc10",
+      "persona_id": "proud_principled",
+      "offer": 10,
+      "expected_accept": false,
+      "model_accept": false,
+      "exact_match": true,
+      "fairness_perceived": "unfair",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1540
+    },
+    {
+      "id": "tc11",
+      "persona_id": "proud_principled",
+      "offer": 30,
+      "expected_accept": false,
+      "model_accept": false,
+      "exact_match": true,
+      "fairness_perceived": "unfair",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1519
+    },
+    {
+      "id": "tc12",
+      "persona_id": "proud_principled",
+      "offer": 45,
+      "expected_accept": true,
+      "model_accept": false,
+      "exact_match": false,
+      "fairness_perceived": "unfair",
+      "judge_score": 4,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1766
+    },
+    {
+      "id": "tc13",
+      "persona_id": "elderly_traditional",
+      "offer": 10,
+      "expected_accept": false,
+      "model_accept": false,
+      "exact_match": true,
+      "fairness_perceived": "unfair",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1592
+    },
+    {
+      "id": "tc14",
+      "persona_id": "elderly_traditional",
+      "offer": 30,
+      "expected_accept": true,
+      "model_accept": true,
+      "exact_match": true,
+      "fairness_perceived": "borderline",
+      "judge_score": 4,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1931
+    },
+    {
+      "id": "tc15",
+      "persona_id": "elderly_traditional",
+      "offer": 45,
+      "expected_accept": true,
+      "model_accept": true,
+      "exact_match": true,
+      "fairness_perceived": "borderline",
+      "judge_score": 5,
+      "judge_consistent": true,
+      "n_steps": 5,
+      "tools": [
+        "settle_round"
+      ],
+      "hallucinations": [],
+      "tokens": 1646
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+[
+  {
+    "id": "tc01",
+    "persona_id": "student_fair",
+    "offer": 10,
+    "expected_accept": false,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc02",
+    "persona_id": "student_fair",
+    "offer": 30,
+    "expected_accept": false,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc03",
+    "persona_id": "student_fair",
+    "offer": 45,
+    "expected_accept": true,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc04",
+    "persona_id": "pragmatic_worker",
+    "offer": 10,
+    "expected_accept": false,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc05",
+    "persona_id": "pragmatic_worker",
+    "offer": 30,
+    "expected_accept": true,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc06",
+    "persona_id": "pragmatic_worker",
+    "offer": 45,
+    "expected_accept": true,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc07",
+    "persona_id": "poor_pragmatist",
+    "offer": 10,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc08",
+    "persona_id": "poor_pragmatist",
+    "offer": 30,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc09",
+    "persona_id": "poor_pragmatist",
+    "offer": 45,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc10",
+    "persona_id": "proud_principled",
+    "offer": 10,
+    "expected_accept": false,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc11",
+    "persona_id": "proud_principled",
+    "offer": 30,
+    "expected_accept": false,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc12",
+    "persona_id": "proud_principled",
+    "offer": 45,
+    "expected_accept": true,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc13",
+    "persona_id": "elderly_traditional",
+    "offer": 10,
+    "expected_accept": false,
+    "segment": "пожилой, традиционные нормы взаимности"
+  },
+  {
+    "id": "tc14",
+    "persona_id": "elderly_traditional",
+    "offer": 30,
+    "expected_accept": true,
+    "segment": "пожилой, традиционные нормы взаимности"
+  },
+  {
+    "id": "tc15",
+    "persona_id": "elderly_traditional",
+    "offer": 45,
+    "expected_accept": true,
+    "segment": "пожилой, традиционные нормы взаимности"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "tc12",
+    "input": {
+      "persona": "proud_principled",
+      "offer": 45,
+      "segment": "принципиальный максималист"
+    },
+    "expected_accept": true,
+    "got_accept": false,
+    "fairness_perceived": "unfair",
+    "distortion": "модель отвергла там, где сегмент обычно принимает"
+  }
+]
