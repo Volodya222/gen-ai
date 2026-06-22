@@ -1,230 +1,258 @@
 """
-Наивный RAG: ChromaDB + OpenAI, fixed-size chunking, только dense-поиск.
+pipeline.py — RAG над собственным корпусом (GPR/РЧ), сравнение стратегий чанкинга.
+================================================================================
+Адаптация каркаса семинара_4/starter под свой корпус. Отличия от стартера:
+  • эмбеддер СМЕННЫЙ: на машине с интернетом — sentence-transformers
+    (paraphrase-multilingual-MiniLM-L12-v2, как в стартере), а если модель не
+    скачать — TF-IDF-фоллбэк (sklearn). Ретрив и eval работают БЕЗ LLM-ключа;
+  • вместо ChromaDB — лёгкий in-memory косинусный индекс (тот же смысл, меньше
+    зависимостей, запускается офлайн);
+  • стратегия чанкинга — параметр: "fixed" (text[i:i+2000]) или
+    "recursive" (RecursiveCharacterTextSplitter 400/80).
 
-Команды:
-    python pipeline.py ingest
-    python pipeline.py ask "Кто жаловался на push-уведомления?"
-
-TODO для семинара:
-    Блок 3, Фикс 1 — заменить фиксированные чанки на рекурсивные по абзацам
-    Блок 3, Фикс 2 — обернуть ответ в Pydantic RAGAnswer
-    Блок 3, Фикс 3 — добавить BM25-гибрид через rank-bm25 и RRF
+ЗАПУСК
+------
+  python pipeline.py ingest --strategy recursive
+  python pipeline.py ask "Чем подавляют клаттер?" --strategy recursive
+Шаг `ask` использует LLM (make_client, response_model=RAGAnswer). Без ключа он
+падает в офлайн-режим и собирает экстрактивный ответ из найденных чанков —
+ретрив при этом полноценный.
 """
 
-import json
-import os
+from __future__ import annotations
+
 import re
-import sys
-import time
+from dataclasses import dataclass, field
 from pathlib import Path
 
-import chromadb
-from chromadb.utils import embedding_functions
+import numpy as np
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from llm_client import get_model, make_client, make_raw_client
 from rank_bm25 import BM25Okapi
-from schema import RAGAnswer
-
-# Блок 1 — наивный RAG: ответ модели идёт обычным текстом
-# client = make_raw_client()
-client = make_client()
-MODEL = get_model()
-chroma = chromadb.PersistentClient(path="./chroma_db")
-
-print("Загружаю эмбеддер...", flush=True)
-_t_embed = time.time()
-EMBED_FN = embedding_functions.SentenceTransformerEmbeddingFunction(
-    model_name="paraphrase-multilingual-MiniLM-L12-v2",
-)
-print(f"Эмбеддер готов за {time.time() - _t_embed:.1f}с", flush=True)
-collection = chroma.get_or_create_collection(
-    name="focus_groups",
-    embedding_function=EMBED_FN,
-    metadata={"hnsw:space": "cosine"},
-)
 
 DATA_DIR = Path(__file__).parent / "data"
-BM25_CACHE = Path(__file__).parent / "bm25_cache.json"
 
-
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=512, chunk_overlap=80, separators=["\n\n", "\n", ". ", "? ", "! ", " "]
+# ─────────────────────────── Чанкинг ───────────────────────────
+_recursive = RecursiveCharacterTextSplitter(
+    chunk_size=400, chunk_overlap=80, separators=["\n\n", "\n", ". ", "? ", "! ", " "]
 )
 
 
-def tokenize_ru(text: str):
-    "Нормализация текста: приведение к нижнему регистру"
-    return re.findall(r"[а-яa-z0-9ё-]{2,}", text.lower())
+def chunk_fixed(text: str, size: int = 2000) -> list[str]:
+    """Стратегия A: рубим каждые N символов, без перекрытия."""
+    return [text[i : i + size] for i in range(0, len(text), size)]
 
 
-def chunk_text(text: str):
-    "Разбивка текста на кусочки рекурсивным сплиттером"
-    return [c.strip() for c in splitter.split_text(text) if c.strip()]
+def chunk_recursive(text: str) -> list[str]:
+    """Стратегия B: рекурсивный сплиттер по абзацам/предложениям, overlap=80."""
+    return [c.strip() for c in _recursive.split_text(text) if c.strip()]
 
 
-# фиксированный чанкинг по символам
-def chunk_text_naive(text: str, chunk_size: int = 2000) -> list[str]:
-    """
-    Примитивная нарезка: рубим каждые N символов.
-    Проблема: граница может попасть в середину фразы «я ругался на |
-    скорость» — и на запрос «скорость» не найдётся чанк про недовольство.
-    """
-    return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
+CHUNKERS = {"fixed": chunk_fixed, "recursive": chunk_recursive}
 
 
-# заполнение векторного хранилища: читаем data/, режем, кладём в ChromaDB
-def ingest():
-    # Чистим старую коллекцию перед переиндексацией
-    existing = collection.get()
-    if existing["ids"]:
-        collection.delete(ids=existing["ids"])
-
-    all_chunks = []
-    all_ids = []
-    all_meta = []
-
-    for f in sorted(DATA_DIR.glob("*.txt")):
-        text = f.read_text(encoding="utf-8")
-        chunks = chunk_text(text)
-
-        for i, c in enumerate(chunks):
-            cid = f"{f.stem}__{i}"
-            all_chunks.append(c)
-            all_ids.append(cid)
-            all_meta.append({"source": f.stem, "chunk_id": i})
-
-        print(f"  {f.stem}: {len(chunks)} чанков")
-
-    collection.add(documents=all_chunks, ids=all_ids, metadatas=all_meta)
-
-    bm25_data = {
-        "ids": all_ids,
-        "tokens": [tokenize_ru(c) for c in all_chunks],
-        "texts": all_chunks,
-    }
-    BM25_CACHE.write_text(json.dumps(bm25_data, ensure_ascii=False))
-
-    total = collection.count()
-    print(
-        f"\nИндексировано: Dense — {total} чанков из {len(list(DATA_DIR.glob('*.txt')))} файлов"
-    )
-    print(f"\nBM25 — {len(all_ids)} чанков кэшировано в {BM25_CACHE.name}")
+def tokenize_ru(text: str) -> list[str]:
+    return re.findall(r"[а-яa-z0-9ё+-]{2,}", text.lower())
 
 
-def _load_bm25():
-    data = json.loads(BM25_CACHE.read_text())
-    bm25 = BM25Okapi(data["tokens"])
-    return bm25, data["ids"], data["texts"]
+# ─────────────────────────── Эмбеддер (сменный) ───────────────────────────
+class DenseBackend:
+    """Интерфейс: fit(docs) → запоминает матрицу документов; encode(queries)."""
+
+    name = "base"
+
+    def fit(self, docs: list[str]) -> None: ...
+    def encode(self, queries: list[str]) -> np.ndarray: ...
+    @property
+    def doc_matrix(self) -> np.ndarray: ...
 
 
-# Retrieve + generate
-def retrieve(query: str, k: int = 5) -> dict:
-    """Dense-поиск в ChromaDB."""
-    return collection.query(query_texts=[query], n_results=k)
+class STBackend(DenseBackend):
+    """sentence-transformers (как в стартере). Требует скачивания модели."""
+
+    name = "sentence-transformers"
+
+    def __init__(self, model_name="paraphrase-multilingual-MiniLM-L12-v2"):
+        from sentence_transformers import SentenceTransformer
+
+        self.model = SentenceTransformer(model_name)
+        self._docs = None
+
+    def fit(self, docs):
+        self._docs = self.model.encode(docs, normalize_embeddings=True)
+
+    def encode(self, queries):
+        return self.model.encode(queries, normalize_embeddings=True)
+
+    @property
+    def doc_matrix(self):
+        return self._docs
 
 
-def hybrid_retrieve(query: str, k: int = 5, top: int = 15, c: int = 60) -> dict:
-    """Hybrid-поиск контекста."""
+class TfidfBackend(DenseBackend):
+    """Офлайн-фоллбэк: лексические TF-IDF-векторы (sklearn). Без скачиваний."""
 
-    # семантический поиск
-    dense = collection.query(query_texts=[query], n_results=top)
-    dense_ids = dense["ids"][0]
+    name = "tfidf-fallback"
 
-    # tf-idf поиск
-    bm25, bm25_ids, bm25_texts = _load_bm25()
-    tokens = tokenize_ru(query)
-    scores = bm25.get_scores(tokens)
+    def __init__(self):
+        from sklearn.feature_extraction.text import TfidfVectorizer
 
-    bm25_order = sorted(range(len(bm25_ids)), key=lambda i: scores[i], reverse=True)[
-        :top
-    ]
-    sparse_ids = [bm25_ids[i] for i in bm25_order]
+        self.vec = TfidfVectorizer(
+            tokenizer=tokenize_ru, token_pattern=None, ngram_range=(1, 2), min_df=1
+        )
+        self._docs = None
 
-    # reciprocal rank fusion для совмещения результатов выдачи двух методов поиска
-    rrf = {}
-    for rank, cid in enumerate(dense_ids):
-        rrf[cid] = rrf.get(cid, 0.0) + 1.0 / (c + rank)
+    def fit(self, docs):
+        m = self.vec.fit_transform(docs).toarray()
+        self._docs = _l2(m)
 
-    for rank, cid in enumerate(sparse_ids):
-        rrf[cid] = rrf.get(cid, 0.0) + 1.0 / (c + rank)
+    def encode(self, queries):
+        return _l2(self.vec.transform(queries).toarray())
 
-    # top-k списка
-    ordered = sorted(rrf.items(), key=lambda kv: kv[1], reverse=True)[:k]
-    top_ids = [cid for cid, _ in ordered]
-
-    # достаем тексты по id
-    text_by_id = dict(zip(bm25_ids, bm25_texts))
-    for i, did in enumerate(dense["ids"][0]):
-        text_by_id[did] = dense["documents"][0][i]
-
-    return {"ids": [top_ids], "documents": [[text_by_id[i] for i in top_ids]]}
+    @property
+    def doc_matrix(self):
+        return self._docs
 
 
+def _l2(m: np.ndarray) -> np.ndarray:
+    n = np.linalg.norm(m, axis=1, keepdims=True)
+    n[n == 0] = 1.0
+    return m / n
+
+
+def make_backend() -> DenseBackend:
+    """sentence-transformers, если доступен и модель грузится; иначе TF-IDF."""
+    try:
+        b = STBackend()
+        print(f"[dense] backend: {b.name}")
+        return b
+    except Exception as e:
+        print(f"[dense] sentence-transformers недоступен ({type(e).__name__}); "
+              f"использую TF-IDF-фоллбэк (ретрив остаётся рабочим).")
+        return TfidfBackend()
+
+
+# ─────────────────────────── Индекс ───────────────────────────
+@dataclass
+class RagIndex:
+    strategy: str
+    backend: DenseBackend
+    ids: list[str] = field(default_factory=list)
+    texts: list[str] = field(default_factory=list)
+    bm25: BM25Okapi | None = None
+
+    @classmethod
+    def build(cls, strategy: str, backend: DenseBackend | None = None) -> "RagIndex":
+        assert strategy in CHUNKERS, strategy
+        backend = backend or make_backend()
+        chunker = CHUNKERS[strategy]
+        ids, texts = [], []
+        for f in sorted(list(DATA_DIR.glob("*.txt")) + list(DATA_DIR.glob("*.md"))):
+            if f.name == "gold.json":
+                continue
+            for i, c in enumerate(chunker(f.read_text(encoding="utf-8"))):
+                ids.append(f"{f.stem}__{i}")
+                texts.append(c)
+        backend.fit(texts)
+        bm25 = BM25Okapi([tokenize_ru(t) for t in texts])
+        print(f"[ingest:{strategy}] {len(texts)} чанков из "
+              f"{len(set(i.split('__')[0] for i in ids))} документов")
+        return cls(strategy, backend, ids, texts, bm25)
+
+    # — dense —
+    def dense(self, query: str, k: int = 5) -> dict:
+        q = self.backend.encode([query])[0]
+        scores = self.backend.doc_matrix @ q
+        order = np.argsort(scores)[::-1][:k]
+        return self._pack(order)
+
+    # — sparse —
+    def sparse(self, query: str, k: int = 5) -> dict:
+        scores = self.bm25.get_scores(tokenize_ru(query))
+        order = np.argsort(scores)[::-1][:k]
+        return self._pack(order)
+
+    # — hybrid: dense + bm25 + RRF —
+    def hybrid(self, query: str, k: int = 5, top: int = 15, c: int = 60) -> dict:
+        q = self.backend.encode([query])[0]
+        dense_order = np.argsort(self.backend.doc_matrix @ q)[::-1][:top]
+        sparse_order = np.argsort(self.bm25.get_scores(tokenize_ru(query)))[::-1][:top]
+        rrf: dict[int, float] = {}
+        for rank, idx in enumerate(dense_order):
+            rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (c + rank)
+        for rank, idx in enumerate(sparse_order):
+            rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (c + rank)
+        order = [i for i, _ in sorted(rrf.items(), key=lambda kv: kv[1], reverse=True)[:k]]
+        return self._pack(order)
+
+    def retrieve(self, query: str, k: int = 5, mode: str = "hybrid") -> dict:
+        return {"dense": self.dense, "sparse": self.sparse, "hybrid": self.hybrid}[mode](query, k)
+
+    def _pack(self, order) -> dict:
+        ids = [self.ids[i] for i in order]
+        docs = [self.texts[i] for i in order]
+        return {"ids": [ids], "documents": [docs]}
+
+
+# ─────────────────────────── Генерация (LLM или офлайн) ───────────────────────────
 def build_prompt(query: str, hits: dict) -> str:
-    docs = hits["documents"][0]
-    ids = hits["ids"][0]
-    ctx = "\n\n---\n\n".join(f"[{i}]\n{d}" for i, d in zip(ids, docs))
+    ctx = "\n\n---\n\n".join(
+        f"[{i}]\n{d}" for i, d in zip(hits["ids"][0], hits["documents"][0])
+    )
     return (
-        "Ты отвечаешь на вопрос продакта по архиву фокус-групп. "
-        "Опирайся ТОЛЬКО на контекст ниже. Если в контексте нет ответа — "
-        "скажи об этом прямо. Перечисли имена участников.\n\n"
-        "Правила:\n"
-        "1. Опирайся ТОЛЬКО на контекст ниже. Не добавляй факты из общего знания.\n"
-        "2. В `quotes` — 1-5 точных коротких цитат (НЕ пересказ), с именами.\n"
-        "3. В `sources` — id блоков, откуда взяты цитаты (формат: 'tbank_egor__0').\n"
-        "4. В `confidence` — честная оценка: 0.9+ ТОЛЬКО когда прямой ответ в контексте,"
-        "0.5-0.8, если собран из несколььких кусков, < 0.5 — если контекст не отвечает на запрос.\n\n"
-        f"Контекст:\n{ctx}\n\n"
-        f"Вопрос: {query}\n\n"
-        "Ответ:"
+        "Ты отвечаешь на технический вопрос по личной базе знаний об РЧ/георадарах. "
+        "Опирайся ТОЛЬКО на контекст ниже; если ответа нет — скажи прямо.\n"
+        "В quotes — 1-5 точных коротких цитат; в sources — id блоков; "
+        "в confidence — честная оценка 0..1.\n\n"
+        f"Контекст:\n{ctx}\n\nВопрос: {query}\n\nОтвет:"
     )
 
 
-def ask(query: str):
-    # Эмбеддим запрос и ищем топ-5 в Chroma.
-    print("Поиск по базе...", flush=True)
-    t0 = time.time()
-    hits = hybrid_retrieve(query, k=15)
-    found = hits["ids"][0]
-    print(
-        f"   нашёл {len(found)} чанков за {time.time() - t0:.1f}с: {', '.join(found)}",
-        flush=True,
-    )
+def ask(query: str, strategy: str = "recursive", k: int = 5):
+    index = RagIndex.build(strategy)
+    hits = index.retrieve(query, k=k, mode="hybrid")
+    ids = hits["ids"][0]
+    print(f"\nВОПРОС: {query}\nНайдено: {', '.join(ids)}")
 
-    # Кладём найденное в промпт, спрашиваем модель.
-    print("Генерация ответа...", flush=True)
-    t1 = time.time()
-    prompt = build_prompt(query, hits)
-    resp: RAGAnswer = client.chat.completions.create(
-        model=MODEL,
-        response_model=RAGAnswer,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2,
-    )
-    print(f"   ответ за {time.time() - t1:.1f}с", flush=True)
+    from schema import RAGAnswer
 
-    print("\n" + "=" * 60)
-    print(f"ВОПРОС: {query}")
-    print("=" * 60)
-    print(resp)
-    print("\n--- источники ---")
-    for i in found:
-        print(f"  {i}")
+    try:
+        from llm_client import get_model, make_client
+
+        client = make_client()
+        resp = client.chat.completions.create(
+            model=get_model(),
+            response_model=RAGAnswer,
+            max_retries=3,
+            temperature=0.2,
+            messages=[{"role": "user", "content": build_prompt(query, hits)}],
+        )
+        print("\n[LLM]", resp.model_dump_json(indent=2))
+        return resp
+    except Exception as e:
+        # офлайн: экстрактивный ответ из топ-чанка
+        print(f"\n[offline] LLM недоступен ({type(e).__name__}). Экстрактивный ответ из контекста.")
+        top = hits["documents"][0][0]
+        sent = re.split(r"(?<=[.!?])\s+", top.strip())
+        resp = RAGAnswer(
+            answer=" ".join(sent[:2]),
+            quotes=[sent[0][:160]] if sent else [],
+            sources=ids[:3],
+            confidence=0.5,
+        )
+        print(resp.model_dump_json(indent=2))
+        return resp
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Использование: python pipeline.py {ingest|ask} [вопрос]")
-        sys.exit(1)
+    import argparse
 
-    cmd = sys.argv[1]
-    if cmd == "ingest":
-        ingest()
-    elif cmd == "ask":
-        if len(sys.argv) < 3:
-            print('Нужен вопрос: python pipeline.py ask "..."')
-            sys.exit(1)
-        ask(sys.argv[2])
+    p = argparse.ArgumentParser()
+    p.add_argument("cmd", choices=["ingest", "ask"])
+    p.add_argument("query", nargs="?", default="")
+    p.add_argument("--strategy", default="recursive", choices=list(CHUNKERS))
+    p.add_argument("--k", type=int, default=5)
+    a = p.parse_args()
+    if a.cmd == "ingest":
+        RagIndex.build(a.strategy)
     else:
-        print(f"Неизвестная команда: {cmd}")
-        sys.exit(1)
+        ask(a.query, a.strategy, a.k)

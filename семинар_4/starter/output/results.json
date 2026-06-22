@@ -1,0 +1,1814 @@
+{
+  "fixed/dense/k5": {
+    "mean": 0.267,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_pavel",
+          "tinkoff_elena",
+          "brightword_kostya",
+          "olymp_olga"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "brightword_dmitry",
+          "brightword_kostya",
+          "tinkoff_timur",
+          "tinkoff_alex",
+          "tinkoff_kirill"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.667,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_pavel",
+          "olymp_sergey",
+          "olymp_igor",
+          "tinkoff_alex"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 0.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_pavel",
+          "olymp_igor",
+          "tinkoff_alex",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_elena",
+          "brightword_kostya",
+          "olymp_sergey",
+          "tinkoff_svetlana"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.667,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_timur",
+          "brightword_dmitry",
+          "brightword_viktor",
+          "brightword_alina",
+          "olymp_darya"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "brightword_viktor",
+          "tinkoff_elena",
+          "olymp_olga",
+          "tinkoff_pavel"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.0,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_timur",
+          "tinkoff_elena",
+          "brightword_alina",
+          "brightword_viktor"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.333,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_svetlana",
+          "tinkoff_timur",
+          "tinkoff_pavel",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_elena",
+          "olymp_sergey",
+          "olymp_igor",
+          "brightword_viktor"
+        ]
+      }
+    ]
+  },
+  "fixed/dense/k3": {
+    "mean": 0.133,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_pavel",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.0,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "brightword_dmitry",
+          "brightword_kostya",
+          "tinkoff_timur"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_pavel",
+          "olymp_sergey"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 0.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_pavel",
+          "olymp_igor"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_elena",
+          "brightword_kostya"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_timur",
+          "brightword_dmitry",
+          "brightword_viktor"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "brightword_viktor",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.0,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_timur",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.333,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_svetlana",
+          "tinkoff_timur"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_elena",
+          "olymp_sergey"
+        ]
+      }
+    ]
+  },
+  "fixed/dense/k1": {
+    "mean": 0.067,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.0,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "brightword_dmitry"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 0.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.0,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_timur"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.0,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.333,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      }
+    ]
+  },
+  "fixed/hybrid/k5": {
+    "mean": 0.467,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_kirill",
+          "tinkoff_elena",
+          "olymp_olga",
+          "brightword_dmitry"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.667,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex",
+          "brightword_dmitry",
+          "tinkoff_kirill",
+          "tinkoff_lyuba",
+          "brightword_kostya"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 1.0,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_pavel",
+          "tinkoff_alex",
+          "tinkoff_lyuba",
+          "tinkoff_timur",
+          "tinkoff_kirill"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 0.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_alex",
+          "tinkoff_kirill",
+          "olymp_maksim",
+          "tinkoff_svetlana"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 1.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_svetlana",
+          "tinkoff_elena",
+          "tinkoff_maria",
+          "tinkoff_pavel"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_timur",
+          "tinkoff_svetlana",
+          "tinkoff_kirill",
+          "tinkoff_lyuba",
+          "olymp_olga"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.667,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_elena",
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "olymp_maksim"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.0,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "brightword_alina",
+          "tinkoff_timur",
+          "olymp_anna",
+          "brightword_viktor",
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.667,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana",
+          "tinkoff_timur",
+          "tinkoff_lyuba",
+          "tinkoff_kirill",
+          "olymp_darya"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_elena",
+          "tinkoff_svetlana",
+          "tinkoff_pavel",
+          "tinkoff_lyuba",
+          "olymp_sergey"
+        ]
+      }
+    ]
+  },
+  "fixed/hybrid/k3": {
+    "mean": 0.2,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_kirill",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex",
+          "brightword_dmitry",
+          "tinkoff_kirill"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.667,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_pavel",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 0.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_alex",
+          "tinkoff_kirill"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_svetlana",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.0,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_timur",
+          "tinkoff_svetlana",
+          "tinkoff_kirill"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_elena",
+          "tinkoff_kirill"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.0,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "brightword_alina",
+          "tinkoff_timur",
+          "olymp_anna"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.333,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana",
+          "tinkoff_timur",
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_elena",
+          "tinkoff_svetlana",
+          "tinkoff_pavel"
+        ]
+      }
+    ]
+  },
+  "fixed/hybrid/k1": {
+    "mean": 0.1,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_pavel"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 0.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.0,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_timur"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.0,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "brightword_alina"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.0,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_elena"
+        ]
+      }
+    ]
+  },
+  "recursive/dense/k5": {
+    "mean": 0.567,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.667,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "olymp_anna",
+          "tinkoff_maria",
+          "tinkoff_lyuba",
+          "tinkoff_pavel",
+          "tinkoff_kirill"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.667,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex",
+          "tinkoff_kirill",
+          "tinkoff_maria",
+          "tinkoff_lyuba",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.667,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_kirill",
+          "tinkoff_alex",
+          "brightword_viktor",
+          "tinkoff_alex",
+          "tinkoff_pavel"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 1.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "olymp_igor",
+          "tinkoff_alex",
+          "brightword_dmitry",
+          "brightword_viktor",
+          "olymp_igor"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 1.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_maria",
+          "tinkoff_maria",
+          "brightword_kostya",
+          "tinkoff_alex",
+          "tinkoff_pavel"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana",
+          "olymp_olga",
+          "olymp_olga",
+          "tinkoff_elena",
+          "olymp_anna"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_kirill",
+          "brightword_kostya",
+          "tinkoff_lyuba",
+          "olymp_igor"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.333,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "brightword_polina",
+          "tinkoff_alex",
+          "tinkoff_elena",
+          "brightword_alina",
+          "tinkoff_maria"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.667,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_elena",
+          "olymp_darya",
+          "tinkoff_elena",
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_pavel",
+          "olymp_sergey",
+          "tinkoff_pavel",
+          "tinkoff_elena",
+          "olymp_igor"
+        ]
+      }
+    ]
+  },
+  "recursive/dense/k3": {
+    "mean": 0.5,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.667,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "olymp_anna",
+          "tinkoff_maria",
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex",
+          "tinkoff_kirill",
+          "tinkoff_maria"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_kirill",
+          "tinkoff_alex",
+          "brightword_viktor"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 1.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "olymp_igor",
+          "tinkoff_alex",
+          "brightword_dmitry"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 1.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_maria",
+          "tinkoff_maria",
+          "brightword_kostya"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana",
+          "olymp_olga",
+          "olymp_olga"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_kirill",
+          "brightword_kostya"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.333,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "brightword_polina",
+          "tinkoff_alex",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.667,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba",
+          "tinkoff_elena",
+          "olymp_darya"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_pavel",
+          "olymp_sergey",
+          "tinkoff_pavel"
+        ]
+      }
+    ]
+  },
+  "recursive/dense/k1": {
+    "mean": 0.233,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "olymp_anna"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_kirill"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 0.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "olymp_igor"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 1.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_maria"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.0,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.0,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.333,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "brightword_polina"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.333,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_pavel"
+        ]
+      }
+    ]
+  },
+  "recursive/hybrid/k5": {
+    "mean": 0.633,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.667,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "olymp_anna",
+          "tinkoff_kirill",
+          "tinkoff_maria",
+          "tinkoff_svetlana",
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.667,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex",
+          "tinkoff_maria",
+          "tinkoff_lyuba",
+          "olymp_anna",
+          "tinkoff_svetlana"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.667,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex",
+          "brightword_viktor",
+          "tinkoff_timur",
+          "tinkoff_svetlana",
+          "tinkoff_alex"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 1.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "brightword_dmitry",
+          "tinkoff_lyuba",
+          "tinkoff_svetlana",
+          "tinkoff_elena",
+          "olymp_igor"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 1.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_maria",
+          "tinkoff_maria",
+          "tinkoff_maria",
+          "tinkoff_timur",
+          "tinkoff_svetlana"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.667,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana",
+          "tinkoff_kirill",
+          "olymp_olga",
+          "brightword_alina",
+          "olymp_olga"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_kirill",
+          "tinkoff_lyuba",
+          "tinkoff_lyuba",
+          "brightword_kostya",
+          "brightword_dmitry"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.333,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana",
+          "brightword_polina",
+          "brightword_kostya",
+          "tinkoff_alex",
+          "olymp_olga"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.667,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_timur",
+          "tinkoff_svetlana",
+          "tinkoff_lyuba",
+          "olymp_darya",
+          "tinkoff_elena"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_pavel",
+          "tinkoff_kirill",
+          "olymp_sergey",
+          "tinkoff_svetlana",
+          "tinkoff_pavel"
+        ]
+      }
+    ]
+  },
+  "recursive/hybrid/k3": {
+    "mean": 0.533,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "olymp_anna",
+          "tinkoff_kirill",
+          "tinkoff_maria"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.667,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex",
+          "tinkoff_maria",
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.667,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex",
+          "brightword_viktor",
+          "tinkoff_timur"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 1.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "brightword_dmitry",
+          "tinkoff_lyuba",
+          "tinkoff_svetlana"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 1.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_maria",
+          "tinkoff_maria",
+          "tinkoff_maria"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana",
+          "tinkoff_kirill",
+          "olymp_olga"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_kirill",
+          "tinkoff_lyuba",
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.333,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana",
+          "brightword_polina",
+          "brightword_kostya"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.333,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_timur",
+          "tinkoff_svetlana",
+          "tinkoff_lyuba"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_pavel",
+          "tinkoff_kirill",
+          "olymp_sergey"
+        ]
+      }
+    ]
+  },
+  "recursive/hybrid/k1": {
+    "mean": 0.333,
+    "rows": [
+      {
+        "id": 1,
+        "type": "прямой",
+        "score": 0.333,
+        "gold": [
+          "olymp_anna",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "olymp_anna"
+        ]
+      },
+      {
+        "id": 2,
+        "type": "синоним",
+        "score": 0.333,
+        "gold": [
+          "olymp_sergey",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex"
+        ]
+      },
+      {
+        "id": 3,
+        "type": "точный артикул",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_alex",
+          "tinkoff_pavel",
+          "tinkoff_timur"
+        ],
+        "retrieved_sources": [
+          "tinkoff_alex"
+        ]
+      },
+      {
+        "id": 4,
+        "type": "multi-hop",
+        "score": 1.0,
+        "gold": [
+          "brightword_dmitry"
+        ],
+        "retrieved_sources": [
+          "brightword_dmitry"
+        ]
+      },
+      {
+        "id": 5,
+        "type": "точный артикул",
+        "score": 1.0,
+        "gold": [
+          "tinkoff_maria"
+        ],
+        "retrieved_sources": [
+          "tinkoff_maria"
+        ]
+      },
+      {
+        "id": 6,
+        "type": "синоним",
+        "score": 0.0,
+        "gold": [
+          "olymp_olga",
+          "brightword_viktor",
+          "brightword_alina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana"
+        ]
+      },
+      {
+        "id": 7,
+        "type": "позитив",
+        "score": 0.333,
+        "gold": [
+          "tinkoff_kirill",
+          "tinkoff_pavel",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_kirill"
+        ]
+      },
+      {
+        "id": 8,
+        "type": "перефраз",
+        "score": 0.0,
+        "gold": [
+          "olymp_igor",
+          "olymp_maksim",
+          "brightword_polina"
+        ],
+        "retrieved_sources": [
+          "tinkoff_svetlana"
+        ]
+      },
+      {
+        "id": 9,
+        "type": "multi-hop cross-collection",
+        "score": 0.0,
+        "gold": [
+          "olymp_darya",
+          "tinkoff_alex",
+          "tinkoff_lyuba"
+        ],
+        "retrieved_sources": [
+          "tinkoff_timur"
+        ]
+      },
+      {
+        "id": 10,
+        "type": "точный артикул",
+        "score": 0.0,
+        "gold": [
+          "olymp_anna",
+          "olymp_maksim",
+          "tinkoff_kirill"
+        ],
+        "retrieved_sources": [
+          "tinkoff_pavel"
+        ]
+      }
+    ]
+  }
+}
