@@ -60,6 +60,8 @@ T = TypeVar("T")
 
 
 def _make_openai_client() -> OpenAI:
+ 
+    base = os.environ.get("LLM_BASE_URL")
     base = os.environ.get("LLM_BASE_URL")
     if base:
         key = os.environ.get("LLM_AUTH_TOKEN") or os.environ.get("OPENAI_API_KEY")
