@@ -1,5 +1,5 @@
 {
-  "persona": "student_fair",
+  "persona": "elderly_traditional",
   "rounds": 6,
   "transcript": [
     {
@@ -9,10 +9,10 @@
         "expected_payoffs"
       ],
       "offer": 30,
-      "responder_accept": false,
-      "fairness_perceived": "unfair",
-      "proposer_payoff": 0,
-      "responder_payoff": 0,
+      "responder_accept": true,
+      "fairness_perceived": "borderline",
+      "proposer_payoff": 70,
+      "responder_payoff": 30,
       "judge_score": 5,
       "hallucinations": []
     },
@@ -23,10 +23,10 @@
         "expected_payoffs"
       ],
       "offer": 30,
-      "responder_accept": false,
-      "fairness_perceived": "unfair",
-      "proposer_payoff": 0,
-      "responder_payoff": 0,
+      "responder_accept": true,
+      "fairness_perceived": "borderline",
+      "proposer_payoff": 70,
+      "responder_payoff": 30,
       "judge_score": 5,
       "hallucinations": []
     },
@@ -36,11 +36,11 @@
         "acceptance_stats",
         "expected_payoffs"
       ],
-      "offer": 40,
-      "responder_accept": false,
-      "fairness_perceived": "unfair",
-      "proposer_payoff": 0,
-      "responder_payoff": 0,
+      "offer": 20,
+      "responder_accept": true,
+      "fairness_perceived": "borderline",
+      "proposer_payoff": 80,
+      "responder_payoff": 20,
       "judge_score": 5,
       "hallucinations": []
     },
@@ -50,11 +50,11 @@
         "acceptance_stats",
         "expected_payoffs"
       ],
-      "offer": 50,
+      "offer": 20,
       "responder_accept": true,
-      "fairness_perceived": "fair",
-      "proposer_payoff": 50,
-      "responder_payoff": 50,
+      "fairness_perceived": "borderline",
+      "proposer_payoff": 80,
+      "responder_payoff": 20,
       "judge_score": 5,
       "hallucinations": []
     },
@@ -64,11 +64,11 @@
         "acceptance_stats",
         "expected_payoffs"
       ],
-      "offer": 50,
+      "offer": 20,
       "responder_accept": true,
-      "fairness_perceived": "fair",
-      "proposer_payoff": 50,
-      "responder_payoff": 50,
+      "fairness_perceived": "borderline",
+      "proposer_payoff": 80,
+      "responder_payoff": 20,
       "judge_score": 5,
       "hallucinations": []
     },
@@ -78,15 +78,13 @@
         "acceptance_stats",
         "expected_payoffs"
       ],
-      "offer": 40,
-      "responder_accept": false,
-      "fairness_perceived": "unfair",
-      "proposer_payoff": 0,
-      "responder_payoff": 0,
+      "offer": 20,
+      "responder_accept": true,
+      "fairness_perceived": "borderline",
+      "proposer_payoff": 80,
+      "responder_payoff": 20,
       "judge_score": 5,
-      "hallucinations": [
-        "ghost_number: упомянуты числа [3] не из раунда"
-      ]
+      "hallucinations": []
     }
   ]
 }

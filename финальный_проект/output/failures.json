@@ -1,14 +1,50 @@
 [
   {
-    "id": "tc12",
+    "id": "tc013",
     "input": {
-      "persona": "proud_principled",
-      "offer": 45,
-      "segment": "принципиальный максималист"
+      "persona": "pragmatic_worker",
+      "offer": 20,
+      "segment": "средний возраст, прагматик"
     },
-    "expected_accept": true,
-    "got_accept": false,
+    "expected_accept": false,
+    "got_accept": true,
     "fairness_perceived": "unfair",
-    "distortion": "модель отвергла там, где сегмент обычно принимает"
+    "distortion": "модель приняла там, где сегмент обычно отвергает"
+  },
+  {
+    "id": "tc014",
+    "input": {
+      "persona": "pragmatic_worker",
+      "offer": 20,
+      "segment": "средний возраст, прагматик"
+    },
+    "expected_accept": false,
+    "got_accept": true,
+    "fairness_perceived": "unfair",
+    "distortion": "модель приняла там, где сегмент обычно отвергает"
+  },
+  {
+    "id": "tc043",
+    "input": {
+      "persona": "elderly_traditional",
+      "offer": 20,
+      "segment": "пожилой, традиционные нормы взаимности"
+    },
+    "expected_accept": false,
+    "got_accept": true,
+    "fairness_perceived": "unfair",
+    "distortion": "модель приняла там, где сегмент обычно отвергает"
+  },
+  {
+    "id": "tc044",
+    "input": {
+      "persona": "elderly_traditional",
+      "offer": 20,
+      "segment": "пожилой, традиционные нормы взаимности"
+    },
+    "expected_accept": false,
+    "got_accept": true,
+    "fairness_perceived": "unfair",
+    "distortion": "модель приняла там, где сегмент обычно отвергает"
   }
 ]

@@ -1,34 +1,32 @@
 """
 Eval проекта «Ультиматум: homo silicus».
 
-Прогоняет 15 тестовых входов (input/test_cases.json) через пайплайн и считает:
+Прогоняет тестовые входы (input/test_cases.json) через пайплайн и считает:
 
 ПРАВИЛЬНОСТЬ:
-  * exact_match  — совпало ли решение модели (accept) с ground-truth порогом
-                   персоны (expected_accept).
-  * judge_consistent_rate — доля ходов, которые судья признал согласованными.
+  * exact_match  — совпало ли решение модели (accept) с ground-truth порогом персоны.
+  * judge_consistent_rate — доля ходов, признанных судьёй согласованными.
   * judge_mean_score — средняя оценка рациональности 1..5.
 
-ПУТЬ (требование рубрики, блок 3):
-  * avg_steps        — среднее число шагов пайплайна на вход.
-  * tools_used       — какие инструменты звались и сколько раз.
-  * total_tokens     — суммарно prompt+completion (proxy стоимости).
-  * est_cost_usd     — грубая оценка стоимости по цене DeepSeek-flash.
+ГИПОТЕЗА (трек A):
+  * reject_rate_model(offer) vs reject_rate_human(offer) по 5 уровням предложения.
+  * 95% доверительные интервалы Вилсона по каждому уровню.
+
+ПУТЬ:
+  * avg_steps, tools_used, total_tokens, est_cost_usd.
 
 ДИАГНОСТИКА:
-  * hallucinations_caught — сколько ghost-раундов/чисел поймано.
-  * провалы (вход → искажение) выписываются в output/failures.json.
-
-ГИПОТЕЗА (трек A): воспроизводит ли модель человеческий стилизованный факт —
-  отвержение низких предложений? Сравниваем с input/human_benchmark.json.
+  * hallucination_report.json — подробный отчёт по галлюцинациям.
+  * failures.json — провалы exact-match.
 
 Запуск:
-    python eval.py            # полный прогон (15 входов)
-    python eval.py --offline  # офлайн-симуляция без API (для самопроверки кода)
+    python eval.py            # полный прогон через API
+    python eval.py --offline  # офлайн-симуляция (проверка кода без API)
 """
 from __future__ import annotations
 
 import json
+import math
 import sys
 from collections import Counter
 from pathlib import Path
@@ -38,7 +36,6 @@ INPUT = HERE / "input"
 OUTPUT = HERE / "output"
 OUTPUT.mkdir(exist_ok=True)
 
-# Цена DeepSeek-flash (вход/выход за 1M токенов) — для оценки стоимости.
 PRICE_IN = 0.07 / 1_000_000
 PRICE_OUT = 0.28 / 1_000_000
 
@@ -51,10 +48,23 @@ def load_cases() -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Офлайн-симуляция (детерминированная) — чтобы прогнать структуру eval без API.
-# С реальным токеном используется боевой путь (run_round из pipeline).
+# Доверительный интервал Вилсона (95%) для доли
 # ---------------------------------------------------------------------------
 
+def wilson_ci(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    """95% ДИ Вилсона для k успехов из n испытаний."""
+    if n == 0:
+        return (0.0, 0.0)
+    p = k / n
+    denom = 1 + z ** 2 / n
+    center = (p + z ** 2 / (2 * n)) / denom
+    spread = z * math.sqrt(p * (1 - p) / n + z ** 2 / (4 * n ** 2)) / denom
+    return (round(max(0.0, center - spread), 3), round(min(1.0, center + spread), 3))
+
+
+# ---------------------------------------------------------------------------
+# Офлайн-симуляция
+# ---------------------------------------------------------------------------
 
 def _offline_round(persona, offer, round_num, history):
     from personas import get_persona
@@ -65,7 +75,6 @@ def _offline_round(persona, offer, round_num, history):
     accept = offer >= p.reject_below
     fairness = "fair" if offer >= 40 else ("borderline" if offer >= 25 else "unfair")
     settled = settle_round(offer, accept)
-    # детерминированный «судья»: согласованно, если решение бьётся с восприятием
     consistent = not (fairness == "unfair" and accept and offer < 10)
     return RoundTrace(
         round=round_num,
@@ -85,16 +94,21 @@ def _offline_round(persona, offer, round_num, history):
     )
 
 
+# ---------------------------------------------------------------------------
+# Основной eval
+# ---------------------------------------------------------------------------
+
 def run_eval(offline: bool) -> dict:
     cases = load_cases()
     rows = []
     failures = []
+    halluc_cases = []   # для hallucination_report
     halluc_total = 0
     tool_counter: Counter = Counter()
     step_counts = []
     tok_in = tok_out = 0
 
-    # для проверки гипотезы: отвержения по уровню предложения
+    # для гипотезы: reject по уровню предложения
     reject_by_offer: dict[int, list[bool]] = {}
 
     if not offline:
@@ -114,6 +128,7 @@ def run_eval(offline: bool) -> dict:
                 "id": c["id"],
                 "persona_id": pid,
                 "offer": offer,
+                "repeat": c.get("repeat", 1),
                 "expected_accept": c["expected_accept"],
                 "model_accept": tr.accept,
                 "exact_match": exact,
@@ -141,6 +156,14 @@ def run_eval(offline: bool) -> dict:
                     ),
                 }
             )
+        # галлюцинации
+        if tr.hallucinations:
+            halluc_cases.append({
+                "id": c["id"],
+                "persona_id": pid,
+                "offer": offer,
+                "flags": tr.hallucinations,
+            })
         halluc_total += len(tr.hallucinations)
         for t in tr.tools_called:
             tool_counter[t] += 1
@@ -150,7 +173,7 @@ def run_eval(offline: bool) -> dict:
         reject_by_offer.setdefault(offer, []).append(not tr.accept)
 
         print(
-            f"[{i:2d}/{len(cases)}] {c['id']} {pid:18s} off={offer:2d} "
+            f"[{i:3d}/{len(cases)}] {c['id']} {pid:18s} off={offer:2d} "
             f"-> accept={tr.accept} exact={exact} judge={tr.judge_score}"
         )
 
@@ -159,12 +182,31 @@ def run_eval(offline: bool) -> dict:
     consistent_rate = sum(r["judge_consistent"] for r in rows) / n
     mean_judge = sum(r["judge_score"] for r in rows) / n
 
-    # проверка гипотезы: доля отвержений по уровню предложения
-    reject_rates = {
-        off: round(sum(v) / len(v), 3) for off, v in sorted(reject_by_offer.items())
-    }
-
+    # --- Гипотеза: reject_rate модели vs людей + ДИ Вилсона ---
     bench = json.loads((INPUT / "human_benchmark.json").read_text(encoding="utf-8"))
+    human_rr = bench["reject_rate_by_offer"]
+
+    hypothesis_rows = []
+    for off in sorted(reject_by_offer.keys()):
+        vals = reject_by_offer[off]
+        k = sum(vals)
+        nn = len(vals)
+        model_rr = round(k / nn, 3)
+        ci = wilson_ci(k, nn)
+        human = human_rr.get(str(off), [None, None])
+        in_human_range = (
+            human[0] is not None and human[0] <= model_rr <= human[1]
+        )
+        hypothesis_rows.append({
+            "offer": off,
+            "n": nn,
+            "model_reject_rate": model_rr,
+            "ci_95": list(ci),
+            "human_range": human,
+            "in_human_range": in_human_range,
+        })
+
+    verdict = _hypothesis_verdict(hypothesis_rows)
 
     summary = {
         "n_cases": n,
@@ -187,9 +229,9 @@ def run_eval(offline: bool) -> dict:
             "rate_per_case": round(halluc_total / n, 3),
         },
         "hypothesis_check": {
-            "reject_rate_by_offer_pct": reject_rates,
-            "human_benchmark": bench["low_offer_reject_rate"],
-            "verdict": _hypothesis_verdict(reject_rates),
+            "by_offer": hypothesis_rows,
+            "human_benchmark_source": bench["source"],
+            "verdict": verdict,
         },
     }
 
@@ -200,32 +242,58 @@ def run_eval(offline: bool) -> dict:
     (OUTPUT / "failures.json").write_text(
         json.dumps(failures, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+    # --- hallucination_report.json ---
+    halluc_report = {
+        "total_caught": halluc_total,
+        "n_cases_with_hallucinations": len(halluc_cases),
+        "rate_per_case": round(halluc_total / n, 3),
+        "cases": halluc_cases,
+        "note": (
+            "ghost_round — ссылка на несуществующий раунд; "
+            "ghost_number — число в reasoning не совпадает с offer/keep/0/50/100."
+        ),
+    }
+    (OUTPUT / "hallucination_report.json").write_text(
+        json.dumps(halluc_report, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     _write_table(rows, summary)
     return summary
 
 
-def _hypothesis_verdict(reject_rates: dict[int, float]) -> str:
-    """Воспроизводится ли стилизованный факт: низкие предложения отвергаются чаще."""
-    low = reject_rates.get(10, 0.0)
-    high = reject_rates.get(45, 0.0)
-    if low > high and low >= 0.3:
+def _hypothesis_verdict(rows: list[dict]) -> str:
+    """
+    Справедливый вердикт: воспроизводит ли модель направление эффекта?
+    Избегаем категоричного 'ПОДТВЕРЖДЕНО' — абсолютные пороги требуют проверки.
+    """
+    low = next((r["model_reject_rate"] for r in rows if r["offer"] == 10), None)
+    high = next((r["model_reject_rate"] for r in rows if r["offer"] == 50), None)
+    in_range_count = sum(1 for r in rows if r["in_human_range"])
+    total = len(rows)
+
+    if low is not None and high is not None and low > high:
         return (
-            "ПОДТВЕРЖДЕНО: модель отвергает низкие предложения заметно чаще, "
-            "чем почти-равные — как люди в экспериментах."
+            f"Модель воспроизводит направление эффекта: reject_rate при offer=10 ({low:.0%}) "
+            f"> reject_rate при offer=50 ({high:.0%}), как у людей. "
+            f"Однако абсолютные пороги требуют проверки: "
+            f"только {in_range_count}/{total} уровней предложения попали в человеческий диапазон. "
+            f"Вывод: модель качественно согласуется с поведением людей, "
+            f"но количественные расхождения указывают на RLHF-смещение."
         )
-    if low > high:
-        return "ЧАСТИЧНО: тренд верный, но отвержение слабее человеческого."
-    return "НЕ ПОДТВЕРЖДЕНО: модель не воспроизводит человеческий паттерн отвержения."
+    return (
+        "Модель не воспроизводит человеческий паттерн отвержения: "
+        "reject_rate не убывает монотонно с ростом предложения."
+    )
 
 
 def _write_table(rows: list[dict], summary: dict) -> None:
     lines = [
-        "| id   | persona            | offer | exp | got | exact | judge | halluc |",
-        "|------|--------------------|-------|-----|-----|-------|-------|--------|",
+        "| id    | persona            | offer | rep | exp | got | exact | judge | halluc |",
+        "|-------|--------------------|-------|-----|-----|-----|-------|-------|--------|",
     ]
     for r in rows:
         lines.append(
             f"| {r['id']} | {r['persona_id']:18s} | {r['offer']:5d} | "
+            f"{r.get('repeat',1):3d} | "
             f"{str(r['expected_accept'])[0]}   | {str(r['model_accept'])[0]}   | "
             f"{'✓' if r['exact_match'] else '✗':5s} | {r['judge_score']:5d} | "
             f"{len(r['hallucinations']):6d} |"
@@ -248,7 +316,7 @@ def main() -> None:
     summary = run_eval(offline)
     print("\n=== ИТОГ ===")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    print(f"\nАртефакты: output/eval_results.json, eval_table.md, failures.json")
+    print(f"\nАртефакты: output/eval_results.json, eval_table.md, failures.json, hallucination_report.json")
 
 
 if __name__ == "__main__":

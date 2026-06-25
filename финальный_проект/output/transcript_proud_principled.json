@@ -1,5 +1,5 @@
 {
-  "persona": "student_fair",
+  "persona": "proud_principled",
   "rounds": 6,
   "transcript": [
     {
@@ -84,9 +84,7 @@
       "proposer_payoff": 0,
       "responder_payoff": 0,
       "judge_score": 5,
-      "hallucinations": [
-        "ghost_number: упомянуты числа [3] не из раунда"
-      ]
+      "hallucinations": []
     }
   ]
 }

@@ -5,16 +5,24 @@
     50
   ],
   "modal_offer_pct": 50,
-  "low_offer_reject_rate": {
-    "offer_le_20pct": [
+  "reject_rate_by_offer": {
+    "10": [
+      0.6,
+      0.8
+    ],
+    "20": [
       0.4,
       0.6
     ],
-    "offer_around_30pct": [
+    "30": [
       0.2,
       0.4
     ],
-    "offer_50pct": [
+    "40": [
+      0.05,
+      0.15
+    ],
+    "50": [
       0.0,
       0.05
     ]

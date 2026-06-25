@@ -1,106 +1,401 @@
 [
   {
-    "id": "tc01",
+    "id": "tc001",
     "persona_id": "student_fair",
     "offer": 10,
+    "repeat": 1,
     "expected_accept": false,
     "segment": "молодёжь, эгалитарные ценности"
   },
   {
-    "id": "tc02",
+    "id": "tc002",
     "persona_id": "student_fair",
-    "offer": 30,
+    "offer": 10,
+    "repeat": 2,
     "expected_accept": false,
     "segment": "молодёжь, эгалитарные ценности"
   },
   {
-    "id": "tc03",
+    "id": "tc003",
     "persona_id": "student_fair",
-    "offer": 45,
+    "offer": 20,
+    "repeat": 1,
+    "expected_accept": false,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc004",
+    "persona_id": "student_fair",
+    "offer": 20,
+    "repeat": 2,
+    "expected_accept": false,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc005",
+    "persona_id": "student_fair",
+    "offer": 30,
+    "repeat": 1,
+    "expected_accept": false,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc006",
+    "persona_id": "student_fair",
+    "offer": 30,
+    "repeat": 2,
+    "expected_accept": false,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc007",
+    "persona_id": "student_fair",
+    "offer": 40,
+    "repeat": 1,
     "expected_accept": true,
     "segment": "молодёжь, эгалитарные ценности"
   },
   {
-    "id": "tc04",
+    "id": "tc008",
+    "persona_id": "student_fair",
+    "offer": 40,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc009",
+    "persona_id": "student_fair",
+    "offer": 50,
+    "repeat": 1,
+    "expected_accept": true,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc010",
+    "persona_id": "student_fair",
+    "offer": 50,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "молодёжь, эгалитарные ценности"
+  },
+  {
+    "id": "tc011",
     "persona_id": "pragmatic_worker",
     "offer": 10,
+    "repeat": 1,
     "expected_accept": false,
     "segment": "средний возраст, прагматик"
   },
   {
-    "id": "tc05",
+    "id": "tc012",
+    "persona_id": "pragmatic_worker",
+    "offer": 10,
+    "repeat": 2,
+    "expected_accept": false,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc013",
+    "persona_id": "pragmatic_worker",
+    "offer": 20,
+    "repeat": 1,
+    "expected_accept": false,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc014",
+    "persona_id": "pragmatic_worker",
+    "offer": 20,
+    "repeat": 2,
+    "expected_accept": false,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc015",
     "persona_id": "pragmatic_worker",
     "offer": 30,
+    "repeat": 1,
     "expected_accept": true,
     "segment": "средний возраст, прагматик"
   },
   {
-    "id": "tc06",
+    "id": "tc016",
     "persona_id": "pragmatic_worker",
-    "offer": 45,
+    "offer": 30,
+    "repeat": 2,
     "expected_accept": true,
     "segment": "средний возраст, прагматик"
   },
   {
-    "id": "tc07",
+    "id": "tc017",
+    "persona_id": "pragmatic_worker",
+    "offer": 40,
+    "repeat": 1,
+    "expected_accept": true,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc018",
+    "persona_id": "pragmatic_worker",
+    "offer": 40,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc019",
+    "persona_id": "pragmatic_worker",
+    "offer": 50,
+    "repeat": 1,
+    "expected_accept": true,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc020",
+    "persona_id": "pragmatic_worker",
+    "offer": 50,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "средний возраст, прагматик"
+  },
+  {
+    "id": "tc021",
     "persona_id": "poor_pragmatist",
     "offer": 10,
+    "repeat": 1,
     "expected_accept": true,
     "segment": "низкий доход, высокая нужда"
   },
   {
-    "id": "tc08",
+    "id": "tc022",
+    "persona_id": "poor_pragmatist",
+    "offer": 10,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc023",
+    "persona_id": "poor_pragmatist",
+    "offer": 20,
+    "repeat": 1,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc024",
+    "persona_id": "poor_pragmatist",
+    "offer": 20,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc025",
     "persona_id": "poor_pragmatist",
     "offer": 30,
+    "repeat": 1,
     "expected_accept": true,
     "segment": "низкий доход, высокая нужда"
   },
   {
-    "id": "tc09",
+    "id": "tc026",
     "persona_id": "poor_pragmatist",
-    "offer": 45,
+    "offer": 30,
+    "repeat": 2,
     "expected_accept": true,
     "segment": "низкий доход, высокая нужда"
   },
   {
-    "id": "tc10",
+    "id": "tc027",
+    "persona_id": "poor_pragmatist",
+    "offer": 40,
+    "repeat": 1,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc028",
+    "persona_id": "poor_pragmatist",
+    "offer": 40,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc029",
+    "persona_id": "poor_pragmatist",
+    "offer": 50,
+    "repeat": 1,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc030",
+    "persona_id": "poor_pragmatist",
+    "offer": 50,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "низкий доход, высокая нужда"
+  },
+  {
+    "id": "tc031",
     "persona_id": "proud_principled",
     "offer": 10,
+    "repeat": 1,
     "expected_accept": false,
     "segment": "принципиальный максималист"
   },
   {
-    "id": "tc11",
+    "id": "tc032",
     "persona_id": "proud_principled",
-    "offer": 30,
+    "offer": 10,
+    "repeat": 2,
     "expected_accept": false,
     "segment": "принципиальный максималист"
   },
   {
-    "id": "tc12",
+    "id": "tc033",
     "persona_id": "proud_principled",
-    "offer": 45,
+    "offer": 20,
+    "repeat": 1,
+    "expected_accept": false,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc034",
+    "persona_id": "proud_principled",
+    "offer": 20,
+    "repeat": 2,
+    "expected_accept": false,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc035",
+    "persona_id": "proud_principled",
+    "offer": 30,
+    "repeat": 1,
+    "expected_accept": false,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc036",
+    "persona_id": "proud_principled",
+    "offer": 30,
+    "repeat": 2,
+    "expected_accept": false,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc037",
+    "persona_id": "proud_principled",
+    "offer": 40,
+    "repeat": 1,
+    "expected_accept": false,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc038",
+    "persona_id": "proud_principled",
+    "offer": 40,
+    "repeat": 2,
+    "expected_accept": false,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc039",
+    "persona_id": "proud_principled",
+    "offer": 50,
+    "repeat": 1,
     "expected_accept": true,
     "segment": "принципиальный максималист"
   },
   {
-    "id": "tc13",
+    "id": "tc040",
+    "persona_id": "proud_principled",
+    "offer": 50,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "принципиальный максималист"
+  },
+  {
+    "id": "tc041",
     "persona_id": "elderly_traditional",
     "offer": 10,
+    "repeat": 1,
     "expected_accept": false,
     "segment": "пожилой, традиционные нормы взаимности"
   },
   {
-    "id": "tc14",
+    "id": "tc042",
+    "persona_id": "elderly_traditional",
+    "offer": 10,
+    "repeat": 2,
+    "expected_accept": false,
+    "segment": "пожилой, традиционные нормы взаимности"
+  },
+  {
+    "id": "tc043",
+    "persona_id": "elderly_traditional",
+    "offer": 20,
+    "repeat": 1,
+    "expected_accept": false,
+    "segment": "пожилой, традиционные нормы взаимности"
+  },
+  {
+    "id": "tc044",
+    "persona_id": "elderly_traditional",
+    "offer": 20,
+    "repeat": 2,
+    "expected_accept": false,
+    "segment": "пожилой, традиционные нормы взаимности"
+  },
+  {
+    "id": "tc045",
     "persona_id": "elderly_traditional",
     "offer": 30,
+    "repeat": 1,
     "expected_accept": true,
     "segment": "пожилой, традиционные нормы взаимности"
   },
   {
-    "id": "tc15",
+    "id": "tc046",
     "persona_id": "elderly_traditional",
-    "offer": 45,
+    "offer": 30,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "пожилой, традиционные нормы взаимности"
+  },
+  {
+    "id": "tc047",
+    "persona_id": "elderly_traditional",
+    "offer": 40,
+    "repeat": 1,
+    "expected_accept": true,
+    "segment": "пожилой, традиционные нормы взаимности"
+  },
+  {
+    "id": "tc048",
+    "persona_id": "elderly_traditional",
+    "offer": 40,
+    "repeat": 2,
+    "expected_accept": true,
+    "segment": "пожилой, традиционные нормы взаимности"
+  },
+  {
+    "id": "tc049",
+    "persona_id": "elderly_traditional",
+    "offer": 50,
+    "repeat": 1,
+    "expected_accept": true,
+    "segment": "пожилой, традиционные нормы взаимности"
+  },
+  {
+    "id": "tc050",
+    "persona_id": "elderly_traditional",
+    "offer": 50,
+    "repeat": 2,
     "expected_accept": true,
     "segment": "пожилой, традиционные нормы взаимности"
   }

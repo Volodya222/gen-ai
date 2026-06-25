@@ -8,12 +8,12 @@
         "acceptance_stats",
         "expected_payoffs"
       ],
-      "offer": 40,
+      "offer": 30,
       "responder_accept": true,
-      "fairness_perceived": "borderline",
-      "proposer_payoff": 60,
-      "responder_payoff": 40,
-      "judge_score": 4,
+      "fairness_perceived": "unfair",
+      "proposer_payoff": 70,
+      "responder_payoff": 30,
+      "judge_score": 5,
       "hallucinations": []
     },
     {
@@ -24,10 +24,10 @@
       ],
       "offer": 30,
       "responder_accept": true,
-      "fairness_perceived": "borderline",
+      "fairness_perceived": "unfair",
       "proposer_payoff": 70,
       "responder_payoff": 30,
-      "judge_score": 4,
+      "judge_score": 5,
       "hallucinations": []
     },
     {
@@ -36,11 +36,11 @@
         "acceptance_stats",
         "expected_payoffs"
       ],
-      "offer": 10,
+      "offer": 20,
       "responder_accept": true,
       "fairness_perceived": "unfair",
-      "proposer_payoff": 90,
-      "responder_payoff": 10,
+      "proposer_payoff": 80,
+      "responder_payoff": 20,
       "judge_score": 5,
       "hallucinations": []
     },
@@ -52,7 +52,7 @@
       ],
       "offer": 20,
       "responder_accept": true,
-      "fairness_perceived": "borderline",
+      "fairness_perceived": "unfair",
       "proposer_payoff": 80,
       "responder_payoff": 20,
       "judge_score": 5,
@@ -64,11 +64,11 @@
         "acceptance_stats",
         "expected_payoffs"
       ],
-      "offer": 10,
+      "offer": 20,
       "responder_accept": true,
       "fairness_perceived": "unfair",
-      "proposer_payoff": 90,
-      "responder_payoff": 10,
+      "proposer_payoff": 80,
+      "responder_payoff": 20,
       "judge_score": 5,
       "hallucinations": []
     },
@@ -78,11 +78,11 @@
         "acceptance_stats",
         "expected_payoffs"
       ],
-      "offer": 10,
+      "offer": 20,
       "responder_accept": true,
       "fairness_perceived": "unfair",
-      "proposer_payoff": 90,
-      "responder_payoff": 10,
+      "proposer_payoff": 80,
+      "responder_payoff": 20,
       "judge_score": 5,
       "hallucinations": []
     }

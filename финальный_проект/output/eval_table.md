@@ -1,19 +1,54 @@
-| id   | persona            | offer | exp | got | exact | judge | halluc |
-|------|--------------------|-------|-----|-----|-------|-------|--------|
-| tc01 | student_fair       |    10 | F   | F   | ✓     |     5 |      0 |
-| tc02 | student_fair       |    30 | F   | F   | ✓     |     5 |      0 |
-| tc03 | student_fair       |    45 | T   | T   | ✓     |     4 |      0 |
-| tc04 | pragmatic_worker   |    10 | F   | F   | ✓     |     5 |      0 |
-| tc05 | pragmatic_worker   |    30 | T   | T   | ✓     |     4 |      0 |
-| tc06 | pragmatic_worker   |    45 | T   | T   | ✓     |     5 |      0 |
-| tc07 | poor_pragmatist    |    10 | T   | T   | ✓     |     4 |      0 |
-| tc08 | poor_pragmatist    |    30 | T   | T   | ✓     |     5 |      0 |
-| tc09 | poor_pragmatist    |    45 | T   | T   | ✓     |     5 |      0 |
-| tc10 | proud_principled   |    10 | F   | F   | ✓     |     5 |      0 |
-| tc11 | proud_principled   |    30 | F   | F   | ✓     |     5 |      0 |
-| tc12 | proud_principled   |    45 | T   | F   | ✗     |     4 |      0 |
-| tc13 | elderly_traditional |    10 | F   | F   | ✓     |     5 |      0 |
-| tc14 | elderly_traditional |    30 | T   | T   | ✓     |     4 |      0 |
-| tc15 | elderly_traditional |    45 | T   | T   | ✓     |     5 |      0 |
+| id    | persona            | offer | rep | exp | got | exact | judge | halluc |
+|-------|--------------------|-------|-----|-----|-----|-------|-------|--------|
+| tc001 | student_fair       |    10 |   1 | F   | F   | ✓     |     5 |      0 |
+| tc002 | student_fair       |    10 |   2 | F   | F   | ✓     |     5 |      0 |
+| tc003 | student_fair       |    20 |   1 | F   | F   | ✓     |     5 |      0 |
+| tc004 | student_fair       |    20 |   2 | F   | F   | ✓     |     5 |      0 |
+| tc005 | student_fair       |    30 |   1 | F   | F   | ✓     |     5 |      0 |
+| tc006 | student_fair       |    30 |   2 | F   | F   | ✓     |     5 |      0 |
+| tc007 | student_fair       |    40 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc008 | student_fair       |    40 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc009 | student_fair       |    50 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc010 | student_fair       |    50 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc011 | pragmatic_worker   |    10 |   1 | F   | F   | ✓     |     5 |      0 |
+| tc012 | pragmatic_worker   |    10 |   2 | F   | F   | ✓     |     5 |      0 |
+| tc013 | pragmatic_worker   |    20 |   1 | F   | T   | ✗     |     5 |      0 |
+| tc014 | pragmatic_worker   |    20 |   2 | F   | T   | ✗     |     5 |      0 |
+| tc015 | pragmatic_worker   |    30 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc016 | pragmatic_worker   |    30 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc017 | pragmatic_worker   |    40 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc018 | pragmatic_worker   |    40 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc019 | pragmatic_worker   |    50 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc020 | pragmatic_worker   |    50 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc021 | poor_pragmatist    |    10 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc022 | poor_pragmatist    |    10 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc023 | poor_pragmatist    |    20 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc024 | poor_pragmatist    |    20 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc025 | poor_pragmatist    |    30 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc026 | poor_pragmatist    |    30 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc027 | poor_pragmatist    |    40 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc028 | poor_pragmatist    |    40 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc029 | poor_pragmatist    |    50 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc030 | poor_pragmatist    |    50 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc031 | proud_principled   |    10 |   1 | F   | F   | ✓     |     5 |      0 |
+| tc032 | proud_principled   |    10 |   2 | F   | F   | ✓     |     5 |      0 |
+| tc033 | proud_principled   |    20 |   1 | F   | F   | ✓     |     5 |      0 |
+| tc034 | proud_principled   |    20 |   2 | F   | F   | ✓     |     5 |      0 |
+| tc035 | proud_principled   |    30 |   1 | F   | F   | ✓     |     5 |      0 |
+| tc036 | proud_principled   |    30 |   2 | F   | F   | ✓     |     5 |      0 |
+| tc037 | proud_principled   |    40 |   1 | F   | F   | ✓     |     5 |      0 |
+| tc038 | proud_principled   |    40 |   2 | F   | F   | ✓     |     5 |      0 |
+| tc039 | proud_principled   |    50 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc040 | proud_principled   |    50 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc041 | elderly_traditional |    10 |   1 | F   | F   | ✓     |     5 |      0 |
+| tc042 | elderly_traditional |    10 |   2 | F   | F   | ✓     |     5 |      0 |
+| tc043 | elderly_traditional |    20 |   1 | F   | T   | ✗     |     5 |      0 |
+| tc044 | elderly_traditional |    20 |   2 | F   | T   | ✗     |     5 |      0 |
+| tc045 | elderly_traditional |    30 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc046 | elderly_traditional |    30 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc047 | elderly_traditional |    40 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc048 | elderly_traditional |    40 |   2 | T   | T   | ✓     |     5 |      0 |
+| tc049 | elderly_traditional |    50 |   1 | T   | T   | ✓     |     5 |      0 |
+| tc050 | elderly_traditional |    50 |   2 | T   | T   | ✓     |     5 |      0 |
 
-pass_rate=0.933 | judge_consistent=1.0 | judge_mean=4.67 | avg_steps=5.0 | tokens=25802 | cost=$0.003109 | halluc=0
+pass_rate=0.92 | judge_consistent=1.0 | judge_mean=5.0 | avg_steps=5.0 | tokens=77667 | cost=$0.006365 | halluc=0

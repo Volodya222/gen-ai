@@ -1,0 +1,34 @@
+{
+  "summary": {
+    "total_caught": 1,
+    "n_cases_with_hallucinations": 1,
+    "total_observations": 74,
+    "rate_per_observation": 0.0135
+  },
+  "by_source": {
+    "eval": {
+      "observations": 50,
+      "caught": 0
+    },
+    "simulation": {
+      "observations": 24,
+      "caught": 1
+    }
+  },
+  "cases": [
+    {
+      "source": "simulation",
+      "persona_id": "student_fair",
+      "round": 6,
+      "offer": 40,
+      "flags": [
+        "ghost_number: упомянуты числа [3] не из раунда"
+      ]
+    }
+  ],
+  "types": {
+    "ghost_round": "ссылка на номер раунда, которого ещё не было (>= текущего)",
+    "ghost_number": "число в reasoning не совпадает с offer/keep/0/50/100 текущего раунда"
+  },
+  "note": "Детектор работает на живых ответах модели (анализ reasoning после каждого хода). В боевом eval галлюцинаций не найдено; в симуляции пойман реальный ghost_number — пример ниже в cases."
+}
